@@ -1,0 +1,26 @@
+//指定したアイテムを持っていたら、ドアの開くアニメーション実行する
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Door : MonoBehaviour
+{ // Start is called before the first frame update
+    public void Open()
+    {
+        GetComponent<Animation>().Play();
+    }
+
+    [SerializeField] Item.Type clearItem;
+ 
+    public void OnClickObj()
+    {
+        //アイテムを持っているかどうか
+        bool clesr = ItemBox.instance.TryUseItem(clearItem);
+        if (clesr == true)
+        {
+            //gameObject.SetActive(false);
+            Open();
+        }
+    }
+}

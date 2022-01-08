@@ -1,0 +1,34 @@
+//ゲームアイテムの種類を列挙型で生成
+//各アイテムにタイプ、画像、ズームオブジェクトの変数を格納
+
+using System;
+using UnityEngine;
+
+
+[Serializable]
+public class Item
+{
+
+    //列挙型：種類を列挙する
+    public enum Type
+    {
+        RedCube,
+        BlueCube,
+        GreenCube,
+        YellowCube,
+        GameCassette,
+        Hammer,
+        Key,
+    }
+
+    public Type type;     // 種類
+    public Sprite sprite; // Slotに表示する画像
+    public GameObject zoomObj;
+    public Item(Type type,Sprite sprite,GameObject zoomObj)
+    {
+        this.type = type;
+        this.sprite = sprite;
+        this.zoomObj = zoomObj;
+    }
+
+}

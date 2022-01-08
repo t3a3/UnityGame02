@@ -1,0 +1,36 @@
+//アイテムをズームする時の動き
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ZoomPanel : MonoBehaviour
+{
+    [SerializeField] GameObject panel;
+    [SerializeField] Transform objParent;
+
+    GameObject zoomObj;
+
+    private void Start()
+    {
+        panel.SetActive(false);
+    }
+    public void ShowPanel()
+    {
+        
+        Item item = ItemBox.instance.GetSlecteditem();
+        if (item != null)
+        {
+            Destroy(zoomObj);
+            panel.SetActive(true);
+            //ObjParentにアイテム生成
+            GameObject zoomObjprefab = ItemGenerator.instance.GetZoomItem(item.type);
+            zoomObj=Instantiate(zoomObjprefab, objParent);
+        }
+    }
+    public void HidePanel()
+    {
+        panel.SetActive(false);
+        Destroy(zoomObj);
+    }
+}

@@ -1,0 +1,26 @@
+//アイテムを拾い、スロットに格納
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PickUp : MonoBehaviour
+{
+    [SerializeField] Item.Type itemtype;
+    Item item;
+
+    private void Start()
+    {
+        //itemTypeに応じてアイテムを生成する
+        item = ItemGenerator.instance.Spawn(itemtype);
+    }
+    public void OnClickObj()
+    {
+        //Debug.Log(itemtype);
+        //ItemBox.csからSetItem関数を実行
+        ItemBox.instance.SetItem(item);
+        //クリックしたら非表示
+        gameObject.SetActive(false);
+        //Debug.Log("非表示");
+     }
+}

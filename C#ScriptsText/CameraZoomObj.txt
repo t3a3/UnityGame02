@@ -1,0 +1,16 @@
+//ズームしたいオブジェに触った時の動き
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraZoomObj : MonoBehaviour
+{
+    //クリックしたら、用意してあるカメラに切り替える
+    [SerializeField] Camera zoomCamera;
+    public void OnClickThis()
+    {
+        CameraManager.instance.SetZoomCamera(zoomCamera);
+    }
+
+}

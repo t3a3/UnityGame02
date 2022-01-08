@@ -1,0 +1,25 @@
+//指定したアイテムを使って指定したオブジェクトを触った時の動き
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SetObj : MonoBehaviour
+{
+    [SerializeField] GameObject setObject,setPicture;
+    [SerializeField] Item.Type useItem;
+    //(適切なアイテムを選択した状態で)
+    //このオブジェクトをクリックしたら
+    //アイテムを表示する
+    public void onClickThis(){
+        //アイテムを持っているかどうか
+        bool hasItem = ItemBox.instance.TryUseItem(useItem);
+        if (hasItem == true)
+        {
+            //アイテム表示
+            setObject.SetActive(true);
+            setPicture.SetActive(true);
+        }
+        
+    }
+}

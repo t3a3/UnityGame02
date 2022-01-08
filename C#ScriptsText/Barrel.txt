@@ -1,0 +1,28 @@
+//指定したアイテムを持っていたら、樽を壊す。壊れたタルを生成。
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class sampleGimick : MonoBehaviour
+{
+  
+    private void Start()
+    {
+        child.SetActive(false);
+
+    }
+    [SerializeField] Item.Type clearItem;
+    [SerializeField] GameObject child;
+
+    public void OnClickObj()
+    {
+        //アイテムを持っているかどうか
+     bool clesr = ItemBox.instance.TryUseItem(clearItem); 
+        if(clesr == true)
+        {
+            gameObject.SetActive(false);
+            child.SetActive(true);
+        }
+    }
+}

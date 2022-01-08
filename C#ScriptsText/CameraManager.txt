@@ -1,0 +1,69 @@
+//カメラの動きの制御。左右のボタンを押したとき、対応するカメラポジションに移動する。
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraManager : MonoBehaviour
+{
+
+    Camera currentCamera;
+    Camera mainCamera;
+
+    public static CameraManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    //全体を回転するカメラのポジションを作成
+    [SerializeField] Transform[] mainCameraPositons = default;
+    [SerializeField] GameObject[] panels;
+    int currentMainPosition;
+    void Start()
+    {
+        panels[0].SetActive(false); 
+        mainCamera = Camera.main;
+        currentCamera = Camera.main;
+        currentMainPosition = 0;
+        currentCamera.transform.position = mainCameraPositons[currentMainPosition].position;
+        currentCamera.transform.rotation = mainCameraPositons[currentMainPosition].rotation;
+    }
+    public void TurnLeft()
+    {
+        currentMainPosition--;
+        if (currentMainPosition < 0)
+        {
+            currentMainPosition = mainCameraPositons.Length - 1;
+        }
+        currentCamera.transform.position = mainCameraPositons[currentMainPosition].position;
+        currentCamera.transform.rotation = mainCameraPositons[currentMainPosition].rotation;
+    }
+    public void TurnRight()
+    {
+        currentMainPosition++;
+        if (currentMainPosition >= mainCameraPositons.Length) {
+            currentMainPosition = 0;
+        }
+        currentCamera.transform.position = mainCameraPositons[currentMainPosition].position;
+        currentCamera.transform.rotation = mainCameraPositons[currentMainPosition].rotation;
+    }
+    public void SetZoomCamera(Camera camera)
+    {
+        panels[0].SetActive(true);
+        panels[1].SetActive(false);
+        panels[2].SetActive(false);
+        currentCamera.gameObject.SetActive(false);
+        camera.gameObject.SetActive(true);
+        currentCamera = camera;
+    }
+    public void OnBackCanera()
+    {
+        panels[0].SetActive(false); ;
+        panels[1].SetActive(true);
+        panels[2].SetActive(true);
+        mainCamera.gameObject.SetActive(true);
+        currentCamera.gameObject.SetActive(false);
+        currentCamera = mainCamera;
+    }
+}
